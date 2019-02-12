@@ -5,7 +5,8 @@ import axios from "axios";
 class ProductList extends Component {
   state = {
     nombreConsulta: "",
-    products: []
+    products: [],
+    total: ""
   };
 
   nombreConsulta = respuesta => {
@@ -24,8 +25,9 @@ class ProductList extends Component {
 
     axios.get(api).then(res => {
       const products = res.data.productos;
+      const total = res.data.total;
 
-      this.setState({ products });
+      this.setState({ products, total });
     });
   };
 
@@ -33,10 +35,20 @@ class ProductList extends Component {
     return (
       <div>
         <SearchBar nombreConsulta={this.nombreConsulta} />
+        {this.state.total !== 0 ? null : (
+          <div className="lead text-center mt-2">
+            No se encontraron resultados para tu búsqueda.
+          </div>
+        )}
         {this.state.products != 0 ? (
           <div>
-            <h3>Lista de productos.</h3>
-            <div className="table-responsive">
+            <div className="row justify-content-between">
+              <h4 className="pb-2">Lista de productos.</h4>
+              <h3 className="lead float">
+                Cantidad de resultados: {this.state.total}
+              </h3>
+              <div className="table-responsive" />
+
               <table className="table table-striped table-sm">
                 <thead>
                   <tr>
@@ -63,7 +75,7 @@ class ProductList extends Component {
         <td>{producto.nombre}</td>
         <td>{producto.marca}</td>
         <td>${producto.precio_unitario_bulto_max_con_iva}</td>
-        <td>{`$${(producto.precio_unitario_bulto_max_con_iva * 1.6).toFixed(
+        <td>{`$${(producto.precio_unitario_bulto_max_con_iva * 1.7).toFixed(
           2
         )}`}</td>
       </tr>
