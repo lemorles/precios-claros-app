@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
 class SearchBar extends Component {
+  state = {
+    error: false
+  };
+
   productoRef = React.createRef();
 
   buscarProducto = e => {
@@ -10,12 +14,23 @@ class SearchBar extends Component {
       nombre: this.productoRef.current.value
     };
 
-    this.props.nombreConsulta(producto);
+    if (producto.nombre == "") {
+      this.setState({
+        error: true
+      });
+    } else {
+      this.props.nombreConsulta(producto);
 
-    e.currentTarget.reset();
+      e.currentTarget.reset();
+
+      this.setState({
+        error: false
+      });
+    }
   };
 
   render() {
+    const existeError = this.state.error;
     return (
       <div>
         <h2 className="text-center">Buscar productos</h2>
@@ -35,6 +50,11 @@ class SearchBar extends Component {
             </div>
           </div>
         </form>
+        {existeError ? (
+          <div className="alert alert-danger text-center">
+            El campo búsqueda es obligatorio.
+          </div>
+        ) : null}
       </div>
     );
   }
