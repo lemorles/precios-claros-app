@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Buscador from "./Buscador";
+import SearchBar from "./SearchBar";
 import axios from "axios";
 
 class ProductList extends Component {
@@ -15,10 +15,10 @@ class ProductList extends Component {
       nombreConsulta: nombre
     });
 
-    this.consultarAPI(nombre);
+    this.consumeAPI(nombre);
   };
 
-  consultarAPI = nombre => {
+  consumeAPI = nombre => {
     const sucursal = "64-1-14"; //sucursal Mendoza
     const api = `https://d3e6htiiul5ek9.cloudfront.net/prod/productos?string=${nombre}&limit=100&id_sucursal=${sucursal}&entorno=mayoristas`;
 
@@ -32,7 +32,7 @@ class ProductList extends Component {
   renderTable() {
     return (
       <div>
-        <Buscador nombreConsulta={this.nombreConsulta} />
+        <SearchBar nombreConsulta={this.nombreConsulta} />
         {this.state.products != 0 ? (
           <div>
             <h3>Lista de productos.</h3>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Buscador extends Component {
+class SearchBar extends Component {
   productoRef = React.createRef();
 
   buscarProducto = e => {
@@ -43,4 +43,4 @@ class Buscador extends Component {
   }
 }
 
-export default Buscador;
+export default SearchBar;
