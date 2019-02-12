@@ -10,7 +10,6 @@
     "bootstrap": "4.2.1",
     "react": "16.8.0",
     "react-dom": "16.8.0",
-    "react-reactstrap-pagination": "1.0.5",
     "react-scripts": "2.0.3",
     "reactstrap": "7.1.0"
   },
