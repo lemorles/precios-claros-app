@@ -40,7 +40,70 @@ class ProductList extends Component {
             No se encontraron resultados para tu búsqueda.
           </div>
         )}
-        {this.state.products != 0 ? (
+        {this.renderProducts()}
+      </div>
+    );
+  }
+
+  renderListProducts() {
+    return this.state.products.map(producto => (
+      <tr key={producto.id}>
+        <td>{producto.id}</td>
+        <td>{producto.nombre}</td>
+        <td>{producto.marca}</td>
+        <td>${producto.precio_unitario_bulto_max_con_iva}</td>
+        <td>{`$${(producto.precio_unitario_bulto_max_con_iva * 1.7).toFixed(
+          2
+        )}`}</td>
+      </tr>
+    ));
+  }
+
+  renderProducts() {
+    try {
+      return this.state.products != 0 ? (
+        <div>
+          <div className="row justify-content-between">
+            <h4 className="pb-2">Lista de productos.</h4>
+            <h3 className="lead float">
+              Cantidad de resultados: {this.state.total}
+            </h3>
+            <div className="table-responsive" />
+
+            <table className="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nombre</th>
+                  <th>Marca</th>
+                  <th>Costo</th>
+                  <th>Precio</th>
+                </tr>
+              </thead>
+              <tbody>{this.renderListProducts()}</tbody>
+            </table>
+          </div>
+        </div>
+      ) : null;
+    } catch {
+      return (
+        <div className="text-center lead">
+          Error interno de Servidor. Intente nuevamente.
+        </div>
+      );
+    } finally {
+    }
+  }
+
+  render() {
+    return <div>{this.renderTable()}</div>;
+  }
+}
+
+export default ProductList;
+
+/*
+this.state.products != 0 ? (
           <div>
             <div className="row justify-content-between">
               <h4 className="pb-2">Lista de productos.</h4>
@@ -59,32 +122,9 @@ class ProductList extends Component {
                     <th>Precio</th>
                   </tr>
                 </thead>
-                <tbody>{this.renderProducts()}</tbody>
+                <tbody>{this.renderListProducts()}</tbody>
               </table>
             </div>
           </div>
-        ) : null}
-      </div>
-    );
-  }
-
-  renderProducts() {
-    return this.state.products.map(producto => (
-      <tr key={producto.id}>
-        <td>{producto.id}</td>
-        <td>{producto.nombre}</td>
-        <td>{producto.marca}</td>
-        <td>${producto.precio_unitario_bulto_max_con_iva}</td>
-        <td>{`$${(producto.precio_unitario_bulto_max_con_iva * 1.7).toFixed(
-          2
-        )}`}</td>
-      </tr>
-    ));
-  }
-
-  render() {
-    return <div>{this.renderTable()}</div>;
-  }
-}
-
-export default ProductList;
+        ) : null
+*/
