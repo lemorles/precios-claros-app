@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SearchBar from "./SearchBar";
+import Product from "./Product";
 import axios from "axios";
 
 class ProductList extends Component {
@@ -31,7 +32,17 @@ class ProductList extends Component {
     });
   };
 
-  renderTable() {
+  renderProducts() {
+    return (
+      <div className="row justify-content-center">
+        {Object.keys(this.state.products).map(key => (
+          <Product key={key} product={this.state.products[key]} />
+        ))}
+      </div>
+    );
+  }
+
+  render() {
     return (
       <div>
         <SearchBar nombreConsulta={this.nombreConsulta} />
@@ -44,87 +55,6 @@ class ProductList extends Component {
       </div>
     );
   }
-
-  renderListProducts() {
-    return this.state.products.map(producto => (
-      <tr key={producto.id}>
-        <td>{producto.id}</td>
-        <td>{producto.nombre}</td>
-        <td>{producto.marca}</td>
-        <td>${producto.precio_unitario_bulto_max_con_iva}</td>
-        <td>{`$${(producto.precio_unitario_bulto_max_con_iva * 1.7).toFixed(
-          2
-        )}`}</td>
-      </tr>
-    ));
-  }
-
-  renderProducts() {
-    try {
-      return this.state.products != 0 ? (
-        <div>
-          <div className="row justify-content-between">
-            <h4 className="pb-2">Lista de productos.</h4>
-            <h3 className="lead float">
-              Cantidad de resultados: {this.state.total}
-            </h3>
-            <div className="table-responsive" />
-
-            <table className="table table-striped table-sm">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Nombre</th>
-                  <th>Marca</th>
-                  <th>Costo</th>
-                  <th>Precio</th>
-                </tr>
-              </thead>
-              <tbody>{this.renderListProducts()}</tbody>
-            </table>
-          </div>
-        </div>
-      ) : null;
-    } catch {
-      return (
-        <div className="text-center lead">
-          Error interno de Servidor. Intente nuevamente.
-        </div>
-      );
-    } finally {
-    }
-  }
-
-  render() {
-    return <div>{this.renderTable()}</div>;
-  }
 }
 
 export default ProductList;
-
-/*
-this.state.products != 0 ? (
-          <div>
-            <div className="row justify-content-between">
-              <h4 className="pb-2">Lista de productos.</h4>
-              <h3 className="lead float">
-                Cantidad de resultados: {this.state.total}
-              </h3>
-              <div className="table-responsive" />
-
-              <table className="table table-striped table-sm">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Marca</th>
-                    <th>Costo</th>
-                    <th>Precio</th>
-                  </tr>
-                </thead>
-                <tbody>{this.renderListProducts()}</tbody>
-              </table>
-            </div>
-          </div>
-        ) : null
-*/
