@@ -16,3 +16,8 @@ body {
 .max-with {
   max-width: 15em;
 }
+
+.navbar {
+  min-height: 50px;
+  max-height: 50px;
+}

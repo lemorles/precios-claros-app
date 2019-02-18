@@ -34,7 +34,7 @@ class SearchBar extends Component {
     return (
       <div>
         <h2 className="text-center">Buscar productos</h2>
-        <form className="py-3" onSubmit={this.buscarProducto}>
+        <form className="py-4" onSubmit={this.buscarProducto}>
           <div className="form-group row">
             <div className="col-md-10">
               <input
