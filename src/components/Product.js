@@ -1,5 +1,4 @@
 import React from "react";
-import notFound from "../../public/img/not-found.png";
 
 const Product = props => {
   const {
