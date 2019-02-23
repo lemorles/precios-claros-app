@@ -1,5 +1,5 @@
 {
-  "name": "app-precios",
+  "name": "app-precios-with-images",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
@@ -7,7 +7,7 @@
   "dependencies": {
     "axios": "0.18.0",
     "axios-progress-bar": "1.2.0",
-    "bootstrap": "4.2.1",
+    "bootstrap": "4.3.1",
     "react": "16.8.0",
     "react-dom": "16.8.0",
     "react-scripts": "2.0.3",
