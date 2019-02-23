@@ -10,11 +10,19 @@ const Product = props => {
 
   return (
     <div className="card my-2 mx-2 max-with">
-      <img
-        src={`https://imagenes.preciosclaros.gob.ar/productos/${id}.jpg`}
-        className="card-img-top"
-        alt={`SKU-${id}`}
-      />
+      {
+        <img
+          src={`https://imagenes.preciosclaros.gob.ar/productos/${id}.jpg`}
+          className="card-img-top"
+          onError={e => {
+            e.target.onerror = null;
+            e.target.src =
+              "https://mayoristas.preciosclaros.gob.ar/img/no-image.png";
+          }}
+          alt={`SKU-${id}`}
+        />
+      }
+
       <div className="card-body text-center">
         <h5 className="card-title">{nombre}</h5>
         <p className="card-text">{marca}</p>
