@@ -26,6 +26,9 @@ const Product = props => {
       <div className="card-body text-center">
         <h5 className="card-title">{nombre}</h5>
         <p className="card-text">{marca}</p>
+        <h6 className="card-title">
+          Costo: {`$${precio_unitario_bulto_max_con_iva.toFixed(2)}`}
+        </h6>
         <h5 className="card-title text-primary">
           Venta: {`$${(precio_unitario_bulto_max_con_iva * 1.7).toFixed(2)}`}
         </h5>
