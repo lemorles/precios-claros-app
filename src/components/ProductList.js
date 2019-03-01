@@ -24,12 +24,19 @@ class ProductList extends Component {
     const sucursal = "64-1-14"; //sucursal Mendoza
     const api = `https://d3e6htiiul5ek9.cloudfront.net/prod/productos?string=${nombre}&limit=100&id_sucursal=${sucursal}&entorno=mayoristas`;
 
-    axios.get(api).then(res => {
-      const products = res.data.productos;
-      const total = res.data.total;
+    axios
+      .get(api, {
+        headers: { "x-api-key": process.env.API_KEY }
+      })
 
-      this.setState({ products, total });
-    });
+      .then(res => {
+        const products = res.data.productos;
+        const total = res.data.total;
+
+        console.log(res);
+
+        this.setState({ products, total });
+      });
   };
 
   renderProducts() {
