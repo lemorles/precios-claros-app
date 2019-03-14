@@ -33,20 +33,26 @@ class ProductList extends Component {
         const products = res.data.productos;
         const total = res.data.total;
 
-        console.log(res);
-
         this.setState({ products, total });
       });
   };
 
   renderProducts() {
-    return (
-      <div className="row justify-content-center">
-        {Object.keys(this.state.products).map(key => (
-          <Product key={key} product={this.state.products[key]} />
-        ))}
-      </div>
-    );
+    try {
+      return (
+        <div className="row justify-content-center">
+          {Object.keys(this.state.products).map(key => (
+            <Product key={key} product={this.state.products[key]} />
+          ))}
+        </div>
+      );
+    } catch {
+      return (
+        <div className="text-center lead">
+          Error interno de Servidor. Intente nuevamente.
+        </div>
+      );
+    }
   }
 
   render() {
