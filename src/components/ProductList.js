@@ -7,29 +7,29 @@ class ProductList extends Component {
   state = {
     nombreConsulta: "",
     products: [],
-    total: ""
+    total: "",
   };
 
-  nombreConsulta = respuesta => {
+  nombreConsulta = (respuesta) => {
     const { nombre } = respuesta;
 
     this.setState({
-      nombreConsulta: nombre
+      nombreConsulta: nombre,
     });
 
     this.consumeAPI(nombre);
   };
 
-  consumeAPI = nombre => {
-    const sucursal = "64-1-14"; //sucursal Mendoza
+  consumeAPI = (nombre) => {
+    const sucursal = "63-1-28"; //sucursal Mendoza
     const api = `https://d3e6htiiul5ek9.cloudfront.net/prod/productos?string=${nombre}&limit=100&id_sucursal=${sucursal}&entorno=mayoristas`;
 
     axios
       .get(api, {
-        headers: { "x-api-key": process.env.API_KEY }
+        headers: { "x-api-key": process.env.API_KEY },
       })
 
-      .then(res => {
+      .then((res) => {
         const products = res.data.productos;
         const total = res.data.total;
 
@@ -41,7 +41,7 @@ class ProductList extends Component {
     try {
       return (
         <div className="row justify-content-center">
-          {Object.keys(this.state.products).map(key => (
+          {Object.keys(this.state.products).map((key) => (
             <Product key={key} product={this.state.products[key]} />
           ))}
         </div>
